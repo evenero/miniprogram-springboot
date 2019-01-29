@@ -1,0 +1,55 @@
+#Screen {
+	position:absolute;
+    z-index: 9998;
+    top: 0px;
+    left: 0px;
+   	background-color:white;
+   	background-position:center;
+   	background-repeat:no-repeat;
+    display: none;
+    filter: alpha(Opacity=30);
+    -moz-opacity:0.30;
+    opacity: 0.5;
+    margin-top: 15px;
+    background-size:100px 100px;
+	-moz-background-size:100px 100px;
+	-moz-background-size:100px 100px;
+	-o-background-size:100px 100px;
+	margin: 0px;
+}
+
+#Message {
+	position: absolute;
+	z-index: 9999;
+	display: none;
+}
+#loading{
+	margin-top: 55%;
+	margin-left:45%;
+}
+.icon-pull-up-loading{
+	background: url("/images/toload.gif")center no-repeat !important;
+	background-size: 45px 45px !important;
+	width: 45px;
+	height: 45px;
+	float: left;
+	margin-left:43.5%;
+	-webkit-animation: reverseRotataZ 1.2s linear infinite;
+	animation: reverseRotataZ 1.2s linear infinite;
+}
+@-webkit-keyframes reverseRotataZ {
+    0% {
+        -webkit-transform: rotateZ(0deg)
+    }
+
+    100% {
+        -webkit-transform: rotateZ(360deg)
+    }
+}
+#anno img{
+	width:100%!important;
+	height:auto!important
+	}
+	#anno div{
+	width:100%!important
+	}

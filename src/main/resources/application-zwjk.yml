@@ -1,0 +1,52 @@
+server:
+  port: 8081
+
+#spring配置
+spring:
+# default-store in spring session. it will be set in redis only outside.
+  session.store-type: none
+#redis配置
+  redis:
+    host: "127.0.0.1"
+    port: "6379"
+    # 连接超时时间（毫秒）
+    timeout: 30000
+    password: "123456"
+    #shiro-redis配置
+    shiro:
+      host: "127.0.0.1"
+      port: "6379"
+      timeout: 30000
+      password: "123456"
+    
+# 数据库配置
+#sqlserver配置
+#  datasource:
+#    url: jdbc:sqlserver://localhost:1433;DatabaseName=app_zsyl
+#    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#    username: sa
+#    password: tangbin19910516
+#    #shiro-datasource配置
+#    shiro:
+#      url: jdbc:sqlserver://localhost:1433;DatabaseName=app_zsyl
+#      driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#      username: sa
+#      password: tangbin19910516
+  #mysql配置
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/miniprogram?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&zeroDateTimeBehavior=CONVERT_TO_NULL
+    username: "test"
+    password: "test"
+    #shiro-datasource配置
+    shiro:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/miniprogram?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&zeroDateTimeBehavior=CONVERT_TO_NULL
+      username: "test"
+      password: "test"
+      
+#自定义配置
+hnsrmyy:
+  weixin_applet_appid: "wx4a8229939b58539d"
+  weixin_applet_secret: "d3aa63c771424fe4367c0a48e505f494"
+  img_cache_time: 5

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>湖南省人民医院</title>
+	<link href="/css/admin/login.css" rel="stylesheet" type="text/css"/>
+	<script src="/js/bootstrap3.3/js/jquery.min.js"></script>
+	<script src="/js/md5.js"></script>
+	<script type="text/javascript" src="/js/admin/login.js"></script>
+</head>
+<body>
+   <input type="hidden" id="uuid" th:value="${uuid}"/>
+   <div class="top" style="width: 100%;">
+		<div class="top-main">
+			<div class="head">
+				<div class="head-left">
+					<img src="/images/admin/logo.png" width="36" height="29"
+						style="float: left">
+					<div class="logo-name">掌上医院 |<span style="color:#7b7b7b;font-size:18px">&nbsp;服务平台</span></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="con">
+		<div class="con-main">
+			<div class="con-left">
+				<img src="/images/admin/loginbody-left.jpg" width="490" height="521">
+			</div>
+			<div class="con-right">
+				<div class="con-login">
+					<div class="login-top">
+						<img src="/images/admin/loginmodue-top.jpg" width="109" height="49">
+					</div>
+					<div class="login-modue">
+						<form action="" method="post">
+							<ul>
+								<li class="login-title">登录</li>
+								<li class="li-sm">账号</li>
+								<li class="li-in"><input class="longer" type="text"
+									name="userName" id="userName"/></li>
+								<li class="li-sm">密码</li>
+								<li class="li-in"><input class="longer" type="password"
+									name="password" id="password"/></li>
+								<li class="li-sm">验证码</li>
+								<li class="li-in"><input class="shorter" type="text"
+									id="code" name="code" style="width: 100px;"/> <img
+									width="80px" height="27px" border="0" id="codeImg"
+									th:src="@{/imgverifycode(uuid=${uuid})}" onclick="changeImg('codeImg')" /></li>
+								<li class="li-sm"><input type="button" class="login-action" id="login"
+									onclick="javascript:toLogin()" value="立即登录" /></li>
+								<li style="text-align: center; margin-top: 10px;">
+									<div id="infor" style="color: red"></div>
+								</li>
+							</ul>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="bot">
+		<div class="bot-main">
+			<div class="company">版权所有 Copyright © 2019.
+				杭州卓健信息科技有限公司&nbsp;&nbsp;&nbsp;ICP:浙B2-20110422</div>
+		</div>
+	</div>
+</body>
+</html>
