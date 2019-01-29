@@ -16,6 +16,7 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.UnauthorizedException;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ucmed.model.utils.DateUtil;
 import com.ucmed.model.utils.JsonUtils;
-import com.ucmed.shiro.model.bean.UserInfo;
+import com.ucmed.shiro.model.bean.pojo.User;
+import com.ucmed.shiro.utils.ShiroUtils;
 
 import net.sf.json.JSONObject;
 
@@ -69,8 +71,8 @@ public class DashboradController {
 		Subject subject = SecurityUtils.getSubject();
         try {
             subject.login(usernamePasswordToken);//交给shiro执行登录校验
-            UserInfo userInfo=(UserInfo) subject.getPrincipal();
-            session.setAttribute("user", userInfo);
+            User user=(User) subject.getPrincipal();
+            session.setAttribute("user", user);
             code = 0;
             info = "登录成功";
         } catch (IncorrectCredentialsException e) {
@@ -112,23 +114,28 @@ public class DashboradController {
 	 * @return
 	 */
 	@RequestMapping(method=RequestMethod.GET, value="/index")
+	@RequiresAuthentication
 	public String index(HttpServletRequest request, 
 			HttpServletResponse response, ModelMap map){
-		Integer orderNum = 0;
-		Integer orderCurNum = 0;
-		Integer clinicNum = 0;
-		Integer inHospitalNum = 0;
-		Integer payNum = 0;
-		String queryNum = request.getParameter("queryNum") == null?"day":request.getParameter("queryNum");
-		JSONObject params = new JSONObject();
-		params.put("query_num", queryNum);
+		//获取已登录用户信息
+		Object tmp = SecurityUtils.getSubject().getPrincipal();
+		//因为devtools的热部署容器不同，导致直接强转的话会报错，需代码处理
+		User user = ShiroUtils.convertObjectToBean(tmp, User.class);
+//		Integer orderNum = 0;
+//		Integer orderCurNum = 0;
+//		Integer clinicNum = 0;
+//		Integer inHospitalNum = 0;
+//		Integer payNum = 0;
+//		String queryNum = request.getParameter("queryNum") == null?"day":request.getParameter("queryNum");
+//		JSONObject params = new JSONObject();
+//		params.put("query_num", queryNum);
 //		apiCommonService.getAdminIndext(params, map);
-		orderNum = (Integer) map.get("orderNum");
-		orderCurNum = (Integer) map.get("orderCurNum");
-		clinicNum = (Integer) map.get("clinicNum");
-		inHospitalNum = (Integer) map.get("inHospitalNum");
-		payNum = orderNum + orderCurNum + clinicNum + inHospitalNum;
-		map.put("payNum",payNum);
+//		orderNum = (Integer) map.get("orderNum");
+//		orderCurNum = (Integer) map.get("orderCurNum");
+//		clinicNum = (Integer) map.get("clinicNum");
+//		inHospitalNum = (Integer) map.get("inHospitalNum");
+//		payNum = orderNum + orderCurNum + clinicNum + inHospitalNum;
+//		map.put("payNum",payNum);
 		map.put("nowdate", DateUtil.getyyyy_MM_dd(new Date()));
 		return "admin/htmls/dashboard";
 	}

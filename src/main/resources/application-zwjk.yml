@@ -44,6 +44,9 @@ spring:
       url: jdbc:mysql://127.0.0.1:3306/miniprogram?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8&zeroDateTimeBehavior=CONVERT_TO_NULL
       username: "test"
       password: "test"
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
       
 #自定义配置
 hnsrmyy:

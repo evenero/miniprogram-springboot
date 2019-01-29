@@ -19,6 +19,8 @@ import com.ucmed.shiro.manager.MySessionManager;
 import com.ucmed.shiro.realm.AdminShiroRealm;
 import com.ucmed.shiro.web.AdminCredentialsMatcher;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
  
@@ -164,6 +166,14 @@ public class ShiroConfig {
         AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
         authorizationAttributeSourceAdvisor.setSecurityManager(securityManager);
         return authorizationAttributeSourceAdvisor;
+    }
+    /**
+     * 引入thymeleaf-extras-shiro
+     * @return
+     */
+    @Bean(name = "shiroDialect")
+    public ShiroDialect shiroDialect(){
+    	return new ShiroDialect();
     }
  
     /**
