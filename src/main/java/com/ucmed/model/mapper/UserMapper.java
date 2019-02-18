@@ -1,10 +1,10 @@
-package com.ucmed.shiro.model.mapper;
+package com.ucmed.model.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.ucmed.shiro.model.bean.pojo.User;
-import com.ucmed.shiro.model.bean.vo.UserRolesVO;
+import com.ucmed.model.bean.pojo.User;
+import com.ucmed.model.bean.vo.UserRolesVO;
 
 @Mapper
 public interface UserMapper {

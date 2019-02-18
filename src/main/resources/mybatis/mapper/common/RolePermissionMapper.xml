@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ucmed.shiro.model.mapper.RolePermissionMapper" >
-  <resultMap id="BaseResultMap" type="com.ucmed.shiro.model.bean.pojo.RolePermissionKey" >
+<mapper namespace="com.ucmed.model.mapper.RolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.ucmed.model.bean.pojo.RolePermissionKey" >
     <id column="permit_id" property="permitId" jdbcType="INTEGER" />
     <id column="role_id" property="roleId" jdbcType="INTEGER" />
   </resultMap>
@@ -10,11 +10,11 @@
     where permit_id = #{permitId,jdbcType=INTEGER}
       and role_id = #{roleId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ucmed.shiro.model.bean.pojo.RolePermissionKey" >
+  <insert id="insert" parameterType="com.ucmed.model.bean.pojo.RolePermissionKey" >
     insert into role_permission (permit_id, role_id)
     values (#{permitId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.ucmed.shiro.model.bean.pojo.RolePermissionKey" >
+  <insert id="insertSelective" parameterType="com.ucmed.model.bean.pojo.RolePermissionKey" >
     insert into role_permission
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="permitId != null" >

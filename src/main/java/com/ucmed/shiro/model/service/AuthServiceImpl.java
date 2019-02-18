@@ -9,14 +9,14 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-import com.ucmed.shiro.model.bean.pojo.Permission;
-import com.ucmed.shiro.model.bean.pojo.Role;
-import com.ucmed.shiro.model.bean.pojo.RolePermissionKey;
-import com.ucmed.shiro.model.bean.vo.PermissionVO;
-import com.ucmed.shiro.model.bean.vo.RoleVO;
-import com.ucmed.shiro.model.mapper.PermissionMapper;
-import com.ucmed.shiro.model.mapper.RoleMapper;
-import com.ucmed.shiro.model.mapper.RolePermissionMapper;
+import com.ucmed.model.bean.pojo.Permission;
+import com.ucmed.model.bean.pojo.Role;
+import com.ucmed.model.bean.pojo.RolePermissionKey;
+import com.ucmed.model.bean.vo.PermissionVO;
+import com.ucmed.model.bean.vo.RoleVO;
+import com.ucmed.model.mapper.PermissionMapper;
+import com.ucmed.model.mapper.RoleMapper;
+import com.ucmed.model.mapper.RolePermissionMapper;
 
 import java.util.List;
 

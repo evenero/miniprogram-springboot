@@ -2,10 +2,10 @@ package com.ucmed.shiro.model.service;
 
 import java.util.List;
 
-import com.ucmed.shiro.model.bean.pojo.Permission;
-import com.ucmed.shiro.model.bean.pojo.Role;
-import com.ucmed.shiro.model.bean.vo.PermissionVO;
-import com.ucmed.shiro.model.bean.vo.RoleVO;
+import com.ucmed.model.bean.pojo.Permission;
+import com.ucmed.model.bean.pojo.Role;
+import com.ucmed.model.bean.vo.PermissionVO;
+import com.ucmed.model.bean.vo.RoleVO;
 
 public interface AuthService {
 	int addPermission(Permission permission);

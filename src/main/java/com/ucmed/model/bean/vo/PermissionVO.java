@@ -1,4 +1,4 @@
-package com.ucmed.shiro.model.bean.vo;
+package com.ucmed.model.bean.vo;
 
 import java.io.Serializable;
 

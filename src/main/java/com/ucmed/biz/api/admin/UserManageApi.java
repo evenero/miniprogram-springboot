@@ -10,20 +10,21 @@ import org.springframework.stereotype.Component;
 import com.ucmed.biz.api.Api;
 import com.ucmed.model.bean.pojo.ProgramConfig;
 import com.ucmed.model.service.ProgramConfigService;
+import com.ucmed.model.service.UserService;
 
 import net.sf.json.JSONObject;
 
 /**
- * 功能配置api
+ * 用户管理api
  * @author ucmed
  *
  */
 @Component
-public class FunctionConfigApi implements Api{
-	private static final Logger LOG = LoggerFactory.getLogger(FunctionConfigApi.class);
+public class UserManageApi implements Api{
+	private static final Logger LOG = LoggerFactory.getLogger(UserManageApi.class);
 	
 	@Autowired
-	private ProgramConfigService configService;
+	private UserService userService;
 
 	@Override
 	public JSONObject execute(JSONObject params) {

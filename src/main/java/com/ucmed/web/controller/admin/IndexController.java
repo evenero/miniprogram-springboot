@@ -1,4 +1,4 @@
-package com.ucmed.web.controller.dashborad;
+package com.ucmed.web.controller.admin;
 
 import java.util.Date;
 import java.util.UUID;
@@ -20,32 +20,27 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ucmed.model.config.CacheConfig;
-import com.ucmed.model.exception.ErrorInfo;
-import com.ucmed.biz.api.admin.FunctionConfigApi;
+import com.ucmed.model.bean.pojo.User;
 import com.ucmed.model.utils.DateUtil;
 import com.ucmed.model.utils.JsonUtils;
-import com.ucmed.shiro.model.bean.pojo.User;
-import net.sf.json.JSONArray;
+
 import net.sf.json.JSONObject;
 
+/**
+ * 管理后台主面板
+ * @author ucmed
+ *
+ */
 @Controller
 @RequestMapping(value="/admin")
-public class DashboradController {
-	private static final Logger LOG = LoggerFactory.getLogger(DashboradController.class);
-	@Autowired
-	private CacheConfig cacheConfig;
-	@Autowired
-	private ErrorInfo errorInfo;
-	@Autowired
-	private FunctionConfigApi functionConfigApi;
+public class IndexController {
+	private static final Logger LOG = LoggerFactory.getLogger(IndexController.class);
 	/**
 	 * 管理员登录页面
 	 * @param request
@@ -58,8 +53,6 @@ public class DashboradController {
 			HttpServletResponse response, ModelMap map){
 		String uuid = UUID.randomUUID().toString();
 		map.put("uuid", uuid);
-		System.err.println(cacheConfig.toString());
-		System.err.println(errorInfo.toString());
 		return "admin/htmls/login";
 	}
 	/**
@@ -149,58 +142,6 @@ public class DashboradController {
 //		map.put("payNum",payNum);
 		map.put("nowdate", DateUtil.getyyyy_MM_dd(new Date()));
 		return "admin/htmls/dashboard";
-	}
-	/**
-	 * 功能管理
-	 * @param request
-	 * @param response
-	 * @param map
-	 * @return
-	 */
-	@RequestMapping(method=RequestMethod.GET,value="/config")
-	public String funcListManage() {
-		return "admin/htmls/funcManagement";
-	}
-	/**
-	 * 获取功能配置，post方式
-	 * @param request
-	 * @param response
-	 * @param map
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(method=RequestMethod.POST, value="/config")
-	public String funcListManagePost(HttpServletRequest request, 
-			HttpServletResponse response, ModelMap map){
-		JSONObject obj = new JSONObject();
-		JSONObject params = JsonUtils.parseRequestToJsonobject(request);
-		JSONObject res = functionConfigApi.execute(params);
-		JSONArray recordList = res.optJSONArray("list");
-		JSONObject pageConfig = new JSONObject();
-		double totalCount = res.optInt("totalCount");
-		double pageSize = params.optDouble("pageSize");
-		double temp = totalCount/pageSize;
-		int totalPages = (int) Math.ceil(temp);
-		pageConfig.put("totalPages", totalPages);
-		obj.put("recordList", recordList);
-		obj.put("pageConfig", pageConfig);
-		return obj.toString();
-	}
-	/**
-	 * 修改功能配置，post方式
-	 * @param request
-	 * @param response
-	 * @param map
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(method=RequestMethod.POST, value="/config/edit")
-	public String funcConfigEditPost(HttpServletRequest request, 
-			HttpServletResponse response, ModelMap map){
-		JSONObject params = JsonUtils.parseRequestToJsonobject(request);
-		params.put("type", "edit");
-		JSONObject res = functionConfigApi.execute(params);
-		return res.toString();
 	}
 	/**
 	 * 轮播图管理

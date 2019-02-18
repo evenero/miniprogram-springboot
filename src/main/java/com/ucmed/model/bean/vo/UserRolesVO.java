@@ -1,9 +1,9 @@
-package com.ucmed.shiro.model.bean.vo;
+package com.ucmed.model.bean.vo;
 
 import java.util.Date;
 import java.util.List;
 
-import com.ucmed.shiro.model.bean.pojo.UserRoleKey;
+import com.ucmed.model.bean.pojo.UserRoleKey;
 
 public class UserRolesVO {
 	private Integer id;

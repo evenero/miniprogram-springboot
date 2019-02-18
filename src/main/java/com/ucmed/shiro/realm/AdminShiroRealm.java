@@ -10,12 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.ucmed.model.bean.pojo.Permission;
+import com.ucmed.model.bean.pojo.Role;
+import com.ucmed.model.bean.pojo.User;
+import com.ucmed.model.service.UserService;
 import com.ucmed.shiro.config.ShiroConfig;
-import com.ucmed.shiro.model.bean.pojo.Permission;
-import com.ucmed.shiro.model.bean.pojo.Role;
-import com.ucmed.shiro.model.bean.pojo.User;
 import com.ucmed.shiro.model.service.AuthService;
-import com.ucmed.shiro.model.service.UserService;
 import com.ucmed.shiro.utils.ShiroUtils;
 
 import java.util.List;

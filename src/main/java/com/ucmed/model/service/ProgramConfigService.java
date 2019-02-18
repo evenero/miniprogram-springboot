@@ -2,7 +2,7 @@ package com.ucmed.model.service;
 
 import java.util.List;
 
-import com.ucmed.model.bean.ProgramConfig;
+import com.ucmed.model.bean.pojo.ProgramConfig;
 
 public interface ProgramConfigService {
 	int deleteByPrimaryKey(Integer id);

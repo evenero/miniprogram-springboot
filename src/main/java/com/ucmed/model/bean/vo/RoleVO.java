@@ -1,8 +1,8 @@
-package com.ucmed.shiro.model.bean.vo;
+package com.ucmed.model.bean.vo;
 
 import java.util.List;
 
-import com.ucmed.shiro.model.bean.pojo.RolePermissionKey;
+import com.ucmed.model.bean.pojo.RolePermissionKey;
 
 /**
  * @项目名称：wyait-manage

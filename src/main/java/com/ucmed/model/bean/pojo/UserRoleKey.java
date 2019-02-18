@@ -1,4 +1,4 @@
-package com.ucmed.shiro.model.bean.pojo;
+package com.ucmed.model.bean.pojo;
 
 public class UserRoleKey {
     private Integer userId;

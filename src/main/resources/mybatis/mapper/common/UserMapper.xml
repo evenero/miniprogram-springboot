@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.ucmed.shiro.model.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.ucmed.shiro.model.bean.pojo.User" >
+<mapper namespace="com.ucmed.model.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.ucmed.model.bean.pojo.User" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="realname" property="realname" jdbcType="VARCHAR" />
@@ -30,7 +30,7 @@
     delete from user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.ucmed.shiro.model.bean.pojo.User" >
+  <insert id="insert" parameterType="com.ucmed.model.bean.pojo.User" >
     insert into user (id, username, realname, 
       mobile, email, password, 
       salt, insert_uid, insert_time, 
@@ -42,7 +42,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=BIT}, #{isJob,jdbcType=BIT}, 
       #{extend,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.ucmed.shiro.model.bean.pojo.User" >
+  <insert id="insertSelective" parameterType="com.ucmed.model.bean.pojo.User" >
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -127,7 +127,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.ucmed.shiro.model.bean.pojo.User" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.ucmed.model.bean.pojo.User" >
     update user
     <set >
       <if test="username != null" >
@@ -169,7 +169,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.ucmed.shiro.model.bean.pojo.User" >
+  <update id="updateByPrimaryKey" parameterType="com.ucmed.model.bean.pojo.User" >
     update user
     set username = #{username,jdbcType=VARCHAR},
       realname = #{realname,jdbcType=VARCHAR},
@@ -188,7 +188,7 @@
   
   <!-- 自定义sql语句 -->
   <!--=Start getUserAndRoles 查询用户及他对应的角色ids -->
-	<resultMap id="getUserRoles" type="com.ucmed.shiro.model.bean.vo.UserRolesVO">
+	<resultMap id="getUserRoles" type="com.ucmed.model.bean.vo.UserRolesVO">
 		<id column="id" property="id" jdbcType="INTEGER" />
 	    <result column="username" property="username" jdbcType="VARCHAR" />
 	    <result column="realname" property="realname" jdbcType="VARCHAR" />
@@ -202,7 +202,7 @@
 	    <result column="is_del" property="isDel" jdbcType="BIT" />
 	    <result column="is_job" property="isJob" jdbcType="BIT" />
 	    <result column="extend" property="extend" jdbcType="VARCHAR" />
-		<collection property="userRoles" ofType="com.ucmed.shiro.model.bean.pojo.UserRoleKey">
+		<collection property="userRoles" ofType="com.ucmed.model.bean.pojo.UserRoleKey">
 			<result column="user_id" property="userId" />
 			<result column="role_id" property="roleId" />
 		</collection>

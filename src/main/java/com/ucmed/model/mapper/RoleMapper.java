@@ -1,9 +1,9 @@
-package com.ucmed.shiro.model.mapper;
+package com.ucmed.model.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.ucmed.shiro.model.bean.pojo.Role;
-import com.ucmed.shiro.model.bean.vo.RoleVO;
+import com.ucmed.model.bean.pojo.Role;
+import com.ucmed.model.bean.vo.RoleVO;
 
 import java.util.List;
 

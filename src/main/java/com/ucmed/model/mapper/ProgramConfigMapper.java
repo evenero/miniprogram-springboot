@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.ucmed.model.bean.ProgramConfig;
+import com.ucmed.model.bean.pojo.ProgramConfig;
 
 @Mapper
 public interface ProgramConfigMapper {
