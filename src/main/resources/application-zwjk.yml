@@ -46,7 +46,7 @@ spring:
       password: "test"
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath:mybatis/mapper/*.xml
+  mapper-locations: classpath:mybatis/mapper/**/*.xml
       
 #自定义配置
 #定义版本号

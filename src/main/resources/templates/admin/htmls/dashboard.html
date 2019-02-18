@@ -19,11 +19,6 @@ xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-        Tip 2: you can also add an image using data-image tag
-    -->
       <div class="logo">
         <a href="/admin/index" class="simple-text logo-normal">
           [[${session.user.realname}]],您好
@@ -31,10 +26,10 @@ xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li class="nav-item active  ">
+          <li class="nav-item active">
             <a class="nav-link" href="./index">
               <i class="material-icons">dashboard</i>
-              <p>数据统计</p>
+              <p>控制面板</p>
             </a>
           </li>
           <li shiro:hasAnyRoles="root,super_admin,high_manage" class="nav-item ">
@@ -44,51 +39,21 @@ xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./order">
-              <i class="material-icons">content_paste</i>
-              <p>预约记录</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./register">
-              <i class="material-icons">content_paste</i>
-              <p>挂号记录</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./clinic">
-              <i class="material-icons">content_paste</i>
-              <p>诊间支付记录</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./inhospital">
-              <i class="material-icons">content_paste</i>
-              <p>住院预交记录</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="./msg">
-              <i class="material-icons">library_books</i>
-              <p>短信模板</p>
-            </a>
-          </li>
-          <li class="nav-item ">
             <a class="nav-link" href="./config">
               <i class="material-icons">bubble_chart</i>
               <p>配置管理</p>
             </a>
           </li>
-        <li class="nav-item ">
-	        <a class="nav-link" href="/admin/refundList">
+          <li class="nav-item ">
+            <a class="nav-link" href="./rotation_chart">
+              <i class="material-icons">bubble_chart</i>
+              <p>轮播图管理</p>
+            </a>
+          </li>
+		<li shiro:hasAnyRoles="test" class="nav-item ">
+			<a class="nav-link" href="/admin/feedback">
 				<i class="material-icons">content_paste</i>
-				<p>退费记录</p>
-			</a>
-		</li>
-		<li class="nav-item ">
-	        <a class="nav-link" href="/admin/feedback">
-				<i class="material-icons">content_paste</i>
-				<p>满意度调查</p>
+				<p>额外内容</p>
 			</a>
 		</li>
         </ul>
@@ -107,15 +72,15 @@ xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
                   <a class="dropdown-item" href="javascript:void(0)" th:onclick="|javascript:goRead('month')|">按月统计</a>
                 </div>
           </div>
+          <!-- 右上角用户自定义图标,若不需要可以注释 -->
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
             <span class="navbar-toggler-icon icon-bar"></span>
           </button>
-          <!-- 右上角用户自定义图标,不需要暂时注释,若有需要可解除注释 -->
-          <!-- <div class="collapse navbar-collapse justify-content-end">
-          <form class="navbar-form">
+          <div class="collapse navbar-collapse justify-content-end">
+            <form class="navbar-form">
               <div class="input-group no-border">
                 <input type="text" value="" class="form-control" placeholder="Search...">
                 <button type="submit" class="btn btn-white btn-round btn-just-icon">
@@ -135,30 +100,21 @@ xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">notifications</i>
+                  <i class="material-icons">person</i>
                   <span class="notification">5</span>
                   <p class="d-lg-none d-md-block">
                     Some Actions
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                  <a class="dropdown-item" href="#">Another Notification</a>
-                  <a class="dropdown-item" href="#">Another One</a>
+                  <a class="dropdown-item" href="#">账号信息</a>
+                  <a class="dropdown-item" href="#">系统通知<span class="notification">5</span></a>
+                  <a class="dropdown-item" href="/admin/logout">退出登录</a>
                 </div>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#pablo">
-                  <i class="material-icons">person</i>
-                  <p class="d-lg-none d-md-block">
-                    Account
-                  </p>
-                </a>
-              </li>
             </ul>
-          </div> -->
+          </div>
+          <!-- 右上角用户自定义图标,若不需要可以注释 -->
         </div>
       </nav>
       <!-- End Navbar -->
