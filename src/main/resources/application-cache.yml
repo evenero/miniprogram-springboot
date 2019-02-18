@@ -1,0 +1,9 @@
+cache: 
+  #不写默认为default_cache
+  cache_name: 
+  #输入0则为默认值,默认为5
+  cache_time_out: 0
+  #图片验证码缓存前缀,不写默认image_verify_code_cache_
+  image_verify_code_prefix: "image_verify_code_cache_"
+  #图片缓存过期时间
+  image_verify_code_time_out: 5

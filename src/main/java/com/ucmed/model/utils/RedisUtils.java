@@ -1,5 +1,7 @@
 package com.ucmed.model.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
@@ -10,6 +12,8 @@ import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
+
+import com.ucmed.model.config.CacheConfig;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -25,24 +29,12 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class RedisUtils {
-    @Autowired
+	private final static Logger LOG = LoggerFactory.getLogger(RedisUtils.class);
+	private final static String DEFAULT_NAME = "DEFAULT_NAME";
+	private final static long DEFAULT_TIME_OUT = 30 * 60;
     private RedisTemplate redisTemplate;
-
-    /**
-     * 解决中文乱码
-     * @param redisTemplate
-     */
-    @Autowired(required = false)
-    public void setRedisTemplate(RedisTemplate redisTemplate) {
-//        RedisSerializer stringSerializer = new StringRedisSerializer();
-        StringRedisSerializer redisKeySerializer = new StringRedisSerializer();
-        GenericJackson2JsonRedisSerializer redisValueSerializer = new GenericJackson2JsonRedisSerializer();
-        redisTemplate.setKeySerializer(redisKeySerializer);
-        redisTemplate.setValueSerializer(redisValueSerializer);
-        redisTemplate.setHashKeySerializer(redisKeySerializer);
-        redisTemplate.setHashValueSerializer(redisValueSerializer);
-        this.redisTemplate = redisTemplate;
-    }
+    @Autowired
+    private CacheConfig cacheConfig;
 
     /**
      * 写入缓存
@@ -265,5 +257,54 @@ public class RedisUtils {
 //        Object object=gson.fromJson(str,Object.class);
 //        return object;
 //    }
+	
+	public void put(String key, String value) {
+        try {
+            redisTemplate.opsForValue().set(key, value, DEFAULT_TIME_OUT, TimeUnit.SECONDS);
+            LOG.info(DEFAULT_NAME + "Redis:Put, Key:" + key + ", Value:" + value + ", Timeout:" + 30 * 60 + "s");
+        } catch (Exception e) {
+            LOG.error(DEFAULT_NAME + "Redis Put Error", e);
+        }
+    }
+
+    public void put(String key, String value, long timeout) {
+        try {
+            redisTemplate.opsForValue().set(key, value, timeout, TimeUnit.SECONDS);
+            LOG.info(DEFAULT_NAME + "Redis:Put, Key:" + key + ", Value:" + value + ", Timeout:" + timeout + "s");
+        } catch (Exception e) {
+            LOG.error(DEFAULT_NAME + "Redis Put Error", e);
+        }
+    }
+    
+    public void put(String key, String value, long timeout, TimeUnit unit) {
+    	try {
+    		redisTemplate.opsForValue().set(key, value, timeout, unit);
+    		LOG.info(DEFAULT_NAME + "Redis:Put, Key:" + key + ", Value:" + value + ", Timeout:" + timeout + "s");
+    	} catch (Exception e) {
+    		LOG.error(DEFAULT_NAME + "Redis Put Error", e);
+    	}
+    }
+
+    /**
+     * get和set方法
+     * @return
+     */
+	public CacheConfig getCacheConfig() {
+		return cacheConfig;
+	}
+	/**
+     * 注入redis序列化类
+     * @param redisTemplate
+     */
+    @Autowired(required = false)
+    public void setRedisTemplate(RedisTemplate redisTemplate) {
+        StringRedisSerializer redisKeySerializer = new StringRedisSerializer();
+        GenericJackson2JsonRedisSerializer redisValueSerializer = new GenericJackson2JsonRedisSerializer();
+        redisTemplate.setKeySerializer(redisKeySerializer);
+        redisTemplate.setValueSerializer(redisValueSerializer);
+        redisTemplate.setHashKeySerializer(redisKeySerializer);
+        redisTemplate.setHashValueSerializer(redisValueSerializer);
+        this.redisTemplate = redisTemplate;
+    }
 
 }

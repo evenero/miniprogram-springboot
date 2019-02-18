@@ -15,10 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ucmed.model.utils.Constants;
 import com.ucmed.model.utils.ImageVerifyCodeUtil;
 import com.ucmed.model.utils.RedisUtils;
-import com.ucmed.model.utils.YmlData;
 
 
 /**
@@ -31,8 +29,6 @@ import com.ucmed.model.utils.YmlData;
 public class ImageVerifyCodeController {
 	private final static Logger LOG = LoggerFactory.getLogger(ImageVerifyCodeController.class);
 	
-	@Autowired
-	private YmlData ymlData;
 	@Autowired
 	private RedisUtils redisUtils;
 	
@@ -54,7 +50,7 @@ public class ImageVerifyCodeController {
 	    HttpSession session = request.getSession();
 	    session.setAttribute("vCode", vCode.getCode());
 	    String uuid = request.getParameter("uuid");
-	    redisUtils.set(Constants.IMAGE_VERIFY_CODE+uuid, vCode.getCode(),ymlData.getImgCacheTime(), TimeUnit.MINUTES); //放入缓存
+	    redisUtils.set(redisUtils.getCacheConfig().getImageVerifyCodePrefix()+uuid, vCode.getCode(),redisUtils.getCacheConfig().getImageVerifyCodeTimeOut(), TimeUnit.MINUTES); //放入缓存
 	    vCode.write(response.getOutputStream());
 	}
 	/**
@@ -70,7 +66,7 @@ public class ImageVerifyCodeController {
 		String uuid = request.getParameter("uuid");
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
-		String verifyCode = (String) redisUtils.get(Constants.IMAGE_VERIFY_CODE+uuid);
+		String verifyCode = (String) redisUtils.get(redisUtils.getCacheConfig().getImageVerifyCodePrefix()+uuid);
 		if(null!=verifyCode && null!= code && !"".equals(verifyCode) && !"".equals(code)) {
 			if (!StringUtils.equalsIgnoreCase(code, verifyCode)) {  //忽略验证码大小写 
 				response.getWriter().write("图形验证码错误");
@@ -78,7 +74,7 @@ public class ImageVerifyCodeController {
 			}else {
 				response.getWriter().write("true");
 			}
-		redisUtils.remove(Constants.IMAGE_VERIFY_CODE+uuid); //验证完成后删除缓存
+		redisUtils.remove(redisUtils.getCacheConfig().getImageVerifyCodePrefix()+uuid); //验证完成后删除缓存
 		}else {
 			response.getWriter().write("图形验证码过期,请刷新验证码");
 		}

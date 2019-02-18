@@ -1,9 +1,6 @@
 package com.ucmed.model.exception;
 
-public class BussinessException extends Exception{
-	/**
-	 * 
-	 */
+public class BusinessException extends Exception{
 	private static final long serialVersionUID = -9211687033666759226L;
 	private final String errorCode;
 	private final String errorMsg;
@@ -13,7 +10,7 @@ public class BussinessException extends Exception{
 	 * @param errorCode 异常代码
 	 * @param errorMsg 异常信息
 	 */
-	public BussinessException(String errorCode, String errorMsg) {
+	public BusinessException(String errorCode, String errorMsg) {
 		super(errorMsg);
 		this.errorCode = errorCode;
 		this.errorMsg = errorMsg;

@@ -49,7 +49,9 @@ mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
       
 #自定义配置
+#定义版本号
+project:
+  version: 1.0.0
 hnsrmyy:
   weixin_applet_appid: "wx4a8229939b58539d"
   weixin_applet_secret: "d3aa63c771424fe4367c0a48e505f494"
-  img_cache_time: 5

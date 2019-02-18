@@ -8,11 +8,11 @@ public class ShiroUtils {
 	@SuppressWarnings("unchecked")
 	public static final <T> T convertObjectToBean(Object obj,Class<T> clazz) {
 		Object temp = new Object();
-		if(obj instanceof Class) {
-			temp = obj;
-		} else {
+//		if(obj instanceof Class) {
+//			temp = obj;
+//		} else {
 			temp = JSONObject.toBean(JSONObject.fromObject(obj), clazz);
-		}
+//		}
 		return (T) temp;
 	}
 	

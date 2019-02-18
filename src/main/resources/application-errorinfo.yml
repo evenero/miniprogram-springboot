@@ -1,0 +1,7 @@
+errorinfo:
+  #对应200响应代码
+  success_info: "请求成功"
+  #对应500响应代码
+  fail_info: "请求失败"
+  #对应null响应代码
+  null_info: "数据为空"

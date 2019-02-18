@@ -20,12 +20,15 @@ import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ucmed.model.config.CacheConfig;
+import com.ucmed.model.exception.ErrorInfo;
 import com.ucmed.model.utils.DateUtil;
 import com.ucmed.model.utils.JsonUtils;
 import com.ucmed.shiro.model.bean.pojo.User;
@@ -37,6 +40,10 @@ import net.sf.json.JSONObject;
 @RequestMapping(value="/admin")
 public class DashboradController {
 	private static final Logger LOG = LoggerFactory.getLogger(DashboradController.class);
+	@Autowired
+	private CacheConfig cacheConfig;
+	@Autowired
+	private ErrorInfo errorInfo;
 	/**
 	 * 管理员登录页面
 	 * @param request
@@ -49,6 +56,8 @@ public class DashboradController {
 			HttpServletResponse response, ModelMap map){
 		String uuid = UUID.randomUUID().toString();
 		map.put("uuid", uuid);
+		System.err.println(cacheConfig.toString());
+		System.err.println(errorInfo.toString());
 		return "admin/htmls/login";
 	}
 	/**

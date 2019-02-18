@@ -128,6 +128,7 @@ public class HttpConnectionManager {
 	 * @return
 	 * @throws UnsupportedEncodingException 
 	 */
+	@SuppressWarnings("unchecked")
 	public static String nameAndValuePairPost(String url, String content) throws UnsupportedEncodingException{
 		//检查参数
 		if(null == httpclient){
