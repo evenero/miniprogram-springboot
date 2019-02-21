@@ -18,6 +18,7 @@ public class UserRolesVO {
     private Date updateTime;
     private Boolean isDel;
     private Boolean isJob;
+    private String version;
     private String extend;
 	private List<UserRoleKey> userRoles;
 
@@ -105,6 +106,12 @@ public class UserRolesVO {
 	public void setIsJob(Boolean isJob) {
 		this.isJob = isJob;
 	}
+	public String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		this.version = version;
+	}
 	public String getExtend() {
 		return extend;
 	}
@@ -117,15 +124,12 @@ public class UserRolesVO {
 	public void setUserRoles(List<UserRoleKey> userRoles) {
 		this.userRoles = userRoles;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "UserRolesVO [id=" + id + ", username=" + username + ", mobile="
-				+ mobile + ", email=" + email + ", password=" + password
-				+ ", insertUid=" + insertUid + ", insertTime=" + insertTime
-				+ ", updateTime=" + updateTime + ", isDel=" + isDel
-				+ ", isJob=" + isJob + ", userRoles=" + userRoles
-				+ "]";
+		return "UserRolesVO [id=" + id + ", username=" + username + ", realname=" + realname + ", mobile=" + mobile
+				+ ", email=" + email + ", password=" + password + ", salt=" + salt + ", insertUid=" + insertUid
+				+ ", insertTime=" + insertTime + ", updateTime=" + updateTime + ", isDel=" + isDel + ", isJob=" + isJob
+				+ ", version=" + version + ", extend=" + extend + ", userRoles=" + userRoles + "]";
 	}
-
 }

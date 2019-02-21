@@ -448,6 +448,57 @@ function configSave(id){
 	html3 += "<a href='javascript:configEdit("+id+")' class='btn btn-primary'>编辑</a>";
 	node3.innerHTML = html3;
 }
+
+/**
+ * 搜索功能配置列表
+ * @returns
+ */
+function searchUserList(){
+  var html = "";
+  $.post('/admin/user',{
+	  pageIndex:$("#pageIndex").val().trim(),
+	  pageSize:$("#pageSize").val().trim()
+  },function(msg){
+	  var data = eval("("+msg+")");
+	  var list = data.userList;
+	  var pageConfig = data.pageConfig;
+	  if(list.length==0){
+		  html += "未查到相关数据";
+	  }else{
+		  for(var i = 0;i < list.length; i++) {
+			  var l = list[i];
+			  html += "<tr id='userLine"+l.userinfo.id+"'>";
+			  html += "<td style='width:15%;'>"+l.userinfo.username+"</td>";
+			  html += "<td style='width:15%;'>"+l.userinfo.realname+"</td>";
+			  html += "<td style='width:15%;'>"+l.userinfo.mobile+"</td>";
+			  var roles_str = "";
+			  if(l.roles.length>0){ //遍历用户角色
+				  for(var j = 0; j<l.roles.length; j++){
+					  var r = l.roles[j];
+					  roles_str += r.roleName;
+					  if(j < l.roles.length && j != l.roles.length-1){
+						  roles_str += "&nbsp;,&nbsp;";
+					  }
+				  }
+			  }else{
+				  roles_str = "未分配";
+			  }
+			  html += "<td style='width:30%;'>"+roles_str+"</td>";
+			  html += "<td style='width:15%;'>"+l.userinfo.version+"</td>";
+			  html += "<td style='width:10%;'><a href='./user/edit/"+l.userinfo.username+"' class='btn btn-primary'>编辑</a>";
+			  html += "</td></tr>";
+		  }
+	  }
+	  $("#table_body").html(html);
+	  $('#pagination').jqPaginator('option', {
+		  totalPages:(pageConfig.totalPages<1)?(1):(pageConfig.totalPages)
+	});
+  });
+}
+
+
+
+
 /**
  * 获取反馈列表
  * @returns

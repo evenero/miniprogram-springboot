@@ -1,5 +1,7 @@
 package com.ucmed.model.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -44,4 +46,19 @@ public interface UserMapper {
 	 * @return
 	 */
 	User findUserByUserName(String username);
+	/**
+	 * 分页查询数据
+	 * @param username
+	 * @param pageStart
+	 * @param pageSize
+	 * @return
+	 */
+	List<User> selectUserByUserNamePagination(@Param("username") String username, @Param("pageStart") Integer pageStart,
+			@Param("pageSize") Integer pageSize);
+	/**
+	 * 获取数据总数（分页用）
+	 * @param username
+	 * @return
+	 */
+	int selectUserTotalCountByUserName(@Param("username") String username);
 }

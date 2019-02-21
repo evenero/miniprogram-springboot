@@ -37,13 +37,13 @@
               <p>控制面板</p>
             </a>
           </li>
-          <li shiro:hasAnyRoles="root,super_admin,high_manage" class="nav-item ">
+          <li shiro:hasAnyRoles="root,high_manage" class="nav-item active">
             <a class="nav-link" href="./user">
               <i class="material-icons">person</i>
               <p>用户管理</p>
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
             <a class="nav-link" href="./config">
               <i class="material-icons">bubble_chart</i>
               <p>配置管理</p>
@@ -132,7 +132,7 @@
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header card-header-primary">
-                  <h4 class="card-title ">配置管理</h4>
+                  <h4 class="card-title ">用户管理</h4>
                   <p class="card-category"></p>
                 </div>
                 <div class="card-body" style="text-align: center;">
@@ -140,16 +140,19 @@
                     <table class="table">
                       <thead class=" text-primary">
                         <th>
-                          配置名称
+                          账号
                         </th>
                         <th>
-                          配置内容
+                          昵称
                         </th>
                         <th>
-                          配置说明
+                          手机号码
                         </th>
                         <th>
-                          操&nbsp;&nbsp;&nbsp;&nbsp;作
+                         所属角色
+                        </th>
+                        <th>
+                          版本号
                         </th>
                       </thead>
                       <tbody id="table_body">
@@ -196,13 +199,13 @@
 	      page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
 	      onPageChange: function (num, type) {
 	    	  $("#pageIndex").val(num);
-	    	  searchConfigList();
+	    	  searchUserList();
 	      }
 	  });
 	  function changePageSize(pageSize){
 		  $("#pageSelect").html(pageSize);
 		  $("#pageSize").val(pageSize);
-		  searchConfigList();
+		  searchUserList();
 	  }
 	  $(document).ready(function(){
 		  var pageSize = $("#pageSize").val();

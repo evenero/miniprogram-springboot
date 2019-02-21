@@ -5,21 +5,14 @@ import java.util.Date;
 
 public class ProgramConfig implements Serializable {
     private Integer id;
-
     private String configName;
-
     private String configValue;
-
     private String note;
-
     private String hospitalId;
-
     private Date createTime;
-
     private Date updateTime;
-
     private String type;
-
+    private String version;
     private String extendParams;
 
     private static final long serialVersionUID = 1L;
@@ -27,71 +20,60 @@ public class ProgramConfig implements Serializable {
     public Integer getId() {
         return id;
     }
-
     public void setId(Integer id) {
         this.id = id;
     }
-
     public String getConfigName() {
         return configName;
     }
-
     public void setConfigName(String configName) {
         this.configName = configName == null ? null : configName.trim();
     }
-
     public String getConfigValue() {
         return configValue;
     }
-
     public void setConfigValue(String configValue) {
         this.configValue = configValue == null ? null : configValue.trim();
     }
-
     public String getNote() {
         return note;
     }
-
     public void setNote(String note) {
         this.note = note == null ? null : note.trim();
     }
-
     public String getHospitalId() {
         return hospitalId;
     }
-
     public void setHospitalId(String hospitalId) {
         this.hospitalId = hospitalId == null ? null : hospitalId.trim();
     }
-
     public Date getCreateTime() {
         return createTime;
     }
-
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-
     public Date getUpdateTime() {
         return updateTime;
     }
-
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
-
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
-
-    public String getExtendParams() {
+    public String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	public String getExtendParams() {
         return extendParams;
     }
-
     public void setExtendParams(String extendParams) {
         this.extendParams = extendParams == null ? null : extendParams.trim();
     }
@@ -116,6 +98,7 @@ public class ProgramConfig implements Serializable {
             && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+            && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getExtendParams() == null ? other.getExtendParams() == null : this.getExtendParams().equals(other.getExtendParams()));
     }
 
@@ -131,6 +114,7 @@ public class ProgramConfig implements Serializable {
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getExtendParams() == null) ? 0 : getExtendParams().hashCode());
         return result;
     }
@@ -149,6 +133,7 @@ public class ProgramConfig implements Serializable {
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", type=").append(type);
+        sb.append(", version=").append(version);
         sb.append(", extendParams=").append(extendParams);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

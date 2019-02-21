@@ -126,6 +126,10 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+	    </dependency>
 		
 		<!-- 开发使用 -->
 		<dependency>
@@ -140,8 +144,78 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<!--**********分离资源文件及依赖包打包配置*************-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/lib</outputDirectory>
+							<excludeTransitive>false</excludeTransitive>
+							<stripVersion>false</stripVersion>
+							<includeScope>runtime</includeScope>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!--这一步实现了光打自己的包-->
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+                    <layout>ZIP</layout>
+                    <!--去除在生产环境中不变的依赖-->
+                    <includes>
+                        <include>
+                            <groupId>${groupId}</groupId>
+                            <artifactId>${artifactId}</artifactId>
+                        </include>
+                    </includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+			  <groupId>org.apache.maven.plugins</groupId>
+			  <artifactId>maven-jar-plugin</artifactId>
+			  <configuration>
+			    <archive>
+			      <manifest>
+			        <!-- 添加依赖jar路径 -->
+			        <addClasspath>true</addClasspath>
+			        <!-- 入口程序 -->
+			        <mainClass>com.ucmed.Application</mainClass>
+			        <!-- 依赖jar包路径 -->
+			        <classpathPrefix>lib/</classpathPrefix>
+			        <!-- 打包命令install即可 -->
+			      </manifest>
+			    </archive>
+			    <excludes>
+					<exclude>/*.properties</exclude>
+					<exclude>/*.yml</exclude>
+					<exclude>/*.xml</exclude>
+					<!-- <exclude>static/**</exclude>
+					<exclude>templates/**</exclude> -->
+				</excludes>
+			  </configuration>
 			</plugin>
 		</plugins>
 	</build>

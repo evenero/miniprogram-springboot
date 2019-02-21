@@ -123,5 +123,20 @@ public class UserServiceImpl implements UserService{
 		}
 		return "SUCCESS";
 	}
+
+	@Override
+	public List<User> selectUserByUserNamePagination(String username, Integer pageStart, Integer pageSize) {
+		return userMapper.selectUserByUserNamePagination(username, pageStart, pageSize);
+	}
+	
+	@Override
+	public int selectUserTotalCountByUserName(String username) {
+		return userMapper.selectUserTotalCountByUserName(username);
+	}
+
+//	@Override
+//	public List<User> getAllData() {
+//		return userMapper.getAllData();
+//	}
 	
 }

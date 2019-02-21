@@ -10,11 +10,12 @@
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
     <result column="extend_params" property="extendParams" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, config_name, config_value, note, hospital_id, create_time, update_time, type, 
-    extend_params
+    version, extend_params
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -29,11 +30,12 @@
   <insert id="insert" parameterType="com.ucmed.model.bean.pojo.ProgramConfig" >
     insert into program_config (id, config_name, config_value, 
       note, hospital_id, create_time, 
-      update_time, type, extend_params
+      update_time, type, version, extend_params
       )
     values (#{id,jdbcType=INTEGER}, #{configName,jdbcType=VARCHAR}, #{configValue,jdbcType=VARCHAR}, 
       #{note,jdbcType=VARCHAR}, #{hospitalId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, #{extendParams,jdbcType=VARCHAR}
+      #{updateTime,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{extendParams,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.ucmed.model.bean.pojo.ProgramConfig" >
@@ -62,6 +64,9 @@
       </if>
       <if test="type != null" >
         type,
+      </if>
+      <if test="version != null" >
+        version,
       </if>
       <if test="extendParams != null" >
         extend_params,
@@ -92,6 +97,9 @@
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
       </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
       <if test="extendParams != null" >
         #{extendParams,jdbcType=VARCHAR},
       </if>
@@ -121,6 +129,9 @@
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
       </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
       <if test="extendParams != null" >
         extend_params = #{extendParams,jdbcType=VARCHAR},
       </if>
@@ -136,6 +147,7 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       type = #{type,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
       extend_params = #{extendParams,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>

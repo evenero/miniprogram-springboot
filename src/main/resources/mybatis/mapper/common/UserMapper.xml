@@ -14,11 +14,12 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="is_del" property="isDel" jdbcType="BIT" />
     <result column="is_job" property="isJob" jdbcType="BIT" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
     <result column="extend" property="extend" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, username, realname, mobile, email, password, salt, insert_uid, insert_time, update_time, 
-    is_del, is_job, extend
+    is_del, is_job, version, extend
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -35,12 +36,12 @@
       mobile, email, password, 
       salt, insert_uid, insert_time, 
       update_time, is_del, is_job, 
-      extend)
+      version, extend)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, 
       #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{salt,jdbcType=VARCHAR}, #{insertUid,jdbcType=INTEGER}, #{insertTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=BIT}, #{isJob,jdbcType=BIT}, 
-      #{extend,jdbcType=VARCHAR})
+      #{version,jdbcType=VARCHAR}, #{extend,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.ucmed.model.bean.pojo.User" >
     insert into user
@@ -80,6 +81,9 @@
       </if>
       <if test="isJob != null" >
         is_job,
+      </if>
+      <if test="version != null" >
+        version,
       </if>
       <if test="extend != null" >
         extend,
@@ -122,6 +126,9 @@
       <if test="isJob != null" >
         #{isJob,jdbcType=BIT},
       </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
       <if test="extend != null" >
         #{extend,jdbcType=VARCHAR},
       </if>
@@ -163,6 +170,9 @@
       <if test="isJob != null" >
         is_job = #{isJob,jdbcType=BIT},
       </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
       <if test="extend != null" >
         extend = #{extend,jdbcType=VARCHAR},
       </if>
@@ -182,6 +192,7 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       is_del = #{isDel,jdbcType=BIT},
       is_job = #{isJob,jdbcType=BIT},
+      version = #{version,jdbcType=VARCHAR},
       extend = #{extend,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -201,6 +212,7 @@
 	    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 	    <result column="is_del" property="isDel" jdbcType="BIT" />
 	    <result column="is_job" property="isJob" jdbcType="BIT" />
+	    <result column="version" property="version" jdbcType="VARCHAR" />
 	    <result column="extend" property="extend" jdbcType="VARCHAR" />
 		<collection property="userRoles" ofType="com.ucmed.model.bean.pojo.UserRoleKey">
 			<result column="user_id" property="userId" />
@@ -213,11 +225,11 @@
 	    u.mobile, u.email, u.password, 
 	    u.salt, u.insert_uid, u.insert_time, 
 	    u.update_time, u.is_del, u.is_job, 
-	    u.extend, ur.user_id, ur.role_id
+	    u.version, u.extend, ur.user_id, ur.role_id
 		from user u
 		LEFT JOIN user_role ur ON
 		u.id=ur.user_id
-		WHERE u.id=#{id} AND u.is_del=0 and u.is_job=0
+		WHERE u.id=#{id} AND u.is_del=0
 	</select>
 	<!--=End getUserAndRoles 查询用户及他对应的角色ids -->
 	<!--=Start findUser 根据用户名和密码查找用户 -->
@@ -246,4 +258,36 @@
 		WHERE username=#{username} and is_del=0
 	</select>
 	<!--=End findUserByName 根据用户名查找用户 -->
+	<!--=Start selectUserByUserNamePagination 根据用户名分页获取用户数据 -->
+	<select id="selectUserByUserNamePagination" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		<where>
+			<if test="username != null and username != ''">
+				username=#{username}
+			</if>
+			<if test="true">
+				and is_del=0
+			</if>
+		</where>
+		order by insert_time DESC 
+   		limit #{pageStart,jdbcType=INTEGER},#{pageSize,jdbcType=INTEGER}
+	</select>
+	<!--=End selectUserByUserNamePagination 根据用户名分页获取用户数据 -->
+	<!--=Start selectUserTotalCountByUerName 根据用户名查询用户数据条数 -->
+	<select id="selectUserTotalCountByUserName" resultType="java.lang.Integer">
+		select
+			count(1)
+		from user
+		<where>
+			<if test="username != null and username != ''">
+				username=#{username}
+			</if>
+			<if test="true">
+				and is_del=0
+			</if>
+		</where>
+	</select>
+	<!--=End selectUserTotalCountByUserName 根据用户名查询用户数据条数 -->
 </mapper>

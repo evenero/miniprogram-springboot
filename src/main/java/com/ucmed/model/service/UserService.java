@@ -1,5 +1,7 @@
 package com.ucmed.model.service;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.ucmed.model.bean.pojo.User;
@@ -46,4 +48,23 @@ public interface UserService {
 	 * @return
 	 */
 	User findUserByUserName(String username);
+	/**
+	 * 根据用户名分页查询用户数据，若用户名为空或null则查询全部
+	 * @param username
+	 * @param pageStart
+	 * @param pageSize
+	 * @return
+	 */
+	List<User> selectUserByUserNamePagination(String username,Integer pageStart,Integer pageSize);
+	/**
+	 * 查询对应用户名的用户数量
+	 * @param username
+	 * @return
+	 */
+	int selectUserTotalCountByUserName(String username);
+	/**
+	 * 获取所有用户
+	 * @return
+	 */
+//	List<User> getAllData();
 }

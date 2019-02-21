@@ -17,6 +17,7 @@ public class User implements Serializable {
     private Date updateTime;
     private Boolean isDel;
     private Boolean isJob;
+    private String version;
     private String extend;
 
     public String getCredentialsSalt() {
@@ -94,7 +95,13 @@ public class User implements Serializable {
     public void setIsJob(Boolean isJob) {
         this.isJob = isJob;
     }
-    public String getExtend() {
+    public String getVersion() {
+		return version;
+	}
+	public void setVersion(String version) {
+		this.version = version;
+	}
+	public String getExtend() {
         return extend;
     }
     public void setExtend(String extend) {
@@ -125,6 +132,7 @@ public class User implements Serializable {
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()))
             && (this.getIsDel() == null ? other.getIsDel() == null : this.getIsDel().equals(other.getIsDel()))
             && (this.getIsJob() == null ? other.getIsJob() == null : this.getIsJob().equals(other.getIsJob()))
+            && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getExtend() == null ? other.getExtend() == null : this.getExtend().equals(other.getExtend()));
     }
 
@@ -144,6 +152,7 @@ public class User implements Serializable {
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         result = prime * result + ((getIsDel() == null) ? 0 : getIsDel().hashCode());
         result = prime * result + ((getIsJob() == null) ? 0 : getIsJob().hashCode());
+        result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getExtend() == null) ? 0 : getExtend().hashCode());
         return result;
     }
@@ -166,6 +175,7 @@ public class User implements Serializable {
         sb.append(", updateTime=").append(updateTime);
         sb.append(", isDel=").append(isDel);
         sb.append(", isJob=").append(isJob);
+        sb.append(", version=").append(version);
         sb.append(", extend=").append(extend);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
